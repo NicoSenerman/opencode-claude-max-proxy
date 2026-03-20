@@ -22,7 +22,7 @@ services:
       - CLAUDE_PROXY_PASSTHROUGH=1
       - CLAUDE_PROXY_HOST=0.0.0.0
     healthcheck:
-      test: ["CMD", "curl", "-sf", "http://127.0.0.1:3456/health"]
+      test: ["CMD", "bun", "-e", "const r=await fetch('http://127.0.0.1:3456/health');process.exit(r.ok?0:1)"]
       interval: 30s
       timeout: 5s
       retries: 3
